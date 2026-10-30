@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://off-script.pages.dev/sitemap-index.xml
