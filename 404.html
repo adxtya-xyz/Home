@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0A09">
+<meta name="robots" content="noindex">
+<title>Off the map · adxtya</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0A09;--bone:#EEE8DD;--ink-2:rgba(238,232,221,.7);--ink-3:rgba(238,232,221,.52);--ember:#FF5B23}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--bone);font-family:"Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+.glow{position:fixed;width:70vmax;height:70vmax;left:-20vmax;top:-30vmax;border-radius:50%;background:radial-gradient(circle,rgba(255,91,35,.35),transparent 62%);filter:blur(60px);pointer-events:none}
+main{position:relative;min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:32px 24px calc(48px + env(safe-area-inset-bottom));max-width:720px;margin:0 auto}
+.mono{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.mono b{color:var(--ember);font-weight:400}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(64px,18vw,140px);line-height:.88;letter-spacing:-.03em;margin:16px 0 12px}
+h1 em{font-style:italic;color:var(--ember)}
+p{color:var(--ink-2);font-size:16px;max-width:30ch}
+a.btn{display:inline-flex;align-items:center;gap:8px;margin-top:32px;padding:14px 24px;border-radius:99px;background:var(--bone);color:var(--bg);font-weight:500;font-size:14.5px;text-decoration:none;width:max-content}
+.cell{margin-top:24px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-3)}
+.cell span{color:var(--ember)}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<canvas id="c" aria-hidden="true"></canvas>
+<main>
+  <div class="mono"><b>404</b> Off the map</div>
+  <h1>Off the <em>grid</em>.</h1>
+  <p>This side quest doesn't exist, or it moved somewhere new.</p>
+  <a class="btn" href="/">Back to adxtya →</a>
+  <div class="cell">=VLOOKUP(page, site, 2, FALSE) → <span>#N/A</span></div>
+</main>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W,H,t=0;
+function rs(){const d=Math.min(devicePixelRatio||1,1.75);W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0)}
+rs();addEventListener('resize',rs);
+function draw(){x.clearRect(0,0,W,H);const G=W<760?22:26;const b=new Path2D(),h=new Path2D();
+for(let i=G/2;i<W;i+=G)for(let j=G/2;j<H;j+=G){const n=Math.sin(i*.011+t*.5)*Math.cos(j*.013-t*.35)+Math.sin((i+j)*.0065+t*.22)*.9;const px=i+Math.cos(n*2.4)*G*.8,py=j+Math.sin(n*2.4)*G*.8;const s=1+.6*Math.max(0,n);(n>1.2?h:b).moveTo(px+s,py);(n>1.2?h:b).arc(px,py,s,0,6.283)}
+x.fillStyle='rgba(238,232,221,.22)';x.fill(b);x.fillStyle='rgba(255,91,35,.9)';x.fill(h);t+=.016;if(!rm)requestAnimationFrame(draw)}
+draw();
+</script>
+</body>
+</html>
